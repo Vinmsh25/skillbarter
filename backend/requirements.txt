@@ -1,0 +1,23 @@
+# Django Core
+Django==5.0.1
+djangorestframework==3.14.0
+
+# JWT Authentication
+djangorestframework-simplejwt==5.3.1
+
+# Real-time / WebSockets
+channels==4.0.0
+channels-redis==4.1.0
+daphne==4.0.0
+
+# CORS
+django-cors-headers==4.3.1
+
+# Environment
+python-dotenv==1.0.0
+
+# Redis client
+redis==5.0.1
+
+# Static Files
+whitenoise==6.6.0
