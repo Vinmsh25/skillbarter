@@ -5,7 +5,7 @@ import { useAuthStore } from '@/stores/authStore'
 import { useSessionsStore } from '@/stores/sessionsStore'
 import { usePresenceStore } from '@/stores/presenceStore'
 import ReviewCard from '@/components/ReviewCard'
-import type { Review } from '@/types'
+import type { Review, LearningPost } from '@/types'
 
 interface ProfileData {
     id: number
@@ -25,6 +25,7 @@ export default function ProfilePage() {
     const { isUserOnline } = usePresenceStore()
     const [profile, setProfile] = useState<ProfileData | null>(null)
     const [reviews, setReviews] = useState<Review[]>([])
+    const [posts, setPosts] = useState<LearningPost[]>([])
     const [isLoading, setIsLoading] = useState(true)
     const [errorMsg, setErrorMsg] = useState<string | null>(null)
 
@@ -34,15 +35,18 @@ export default function ProfilePage() {
     // Session creation
     const { createSession } = useSessionsStore()
     const navigate = useNavigate()
-    const [isConnecting, setIsConnecting] = useState(false)
+    const [connectingPostId, setConnectingPostId] = useState<number | null>(null)
 
     useEffect(() => {
         const loadProfile = async () => {
             setIsLoading(true)
             setErrorMsg(null)
             try {
+                let userId: number | string | undefined
+
                 if (isOwnProfile) {
                     if (currentUser) {
+                        userId = currentUser.id
                         setProfile({
                             id: currentUser.id,
                             name: currentUser.name,
@@ -54,76 +58,68 @@ export default function ProfilePage() {
                             total_reviews: currentUser.total_reviews,
                             date_joined: currentUser.date_joined,
                         })
-
-                        // Fetch reviews
-                        try {
-                            const reviewsRes = await api.get(`/users/${currentUser.id}/reviews/`)
-                            const reviewsData = Array.isArray(reviewsRes.data)
-                                ? reviewsRes.data
-                                : (reviewsRes.data?.results ?? [])
-                            setReviews(reviewsData)
-                        } catch {
-                            // Ignore review fetch errors
-                        }
                     } else if (isAuthenticated) {
-                        try {
-                            await fetchProfile()
-                        } catch (err) {
-                            console.error('Failed to fetch own profile', err)
-                            setErrorMsg('Auth error. Please login again.')
-                        }
+                        await fetchProfile()
+                        return // Will re-run when currentUser is updated
                     }
                 } else {
-                    // It's another user
-                    const userId = username
+                    userId = username
+                    const userRes = await api.get(`/users/${userId}/`)
+                    const userData = userRes.data
+                    setProfile({
+                        id: userData.id,
+                        name: userData.name,
+                        is_online: userData.is_online,
+                        availability: userData.availability,
+                        average_rating: userData.average_rating,
+                        total_reviews: userData.total_reviews,
+                    })
+                }
+
+                if (userId) {
+                    // Fetch reviews
                     try {
-                        const userRes = await api.get(`/users/${userId}/`)
-                        const userData = userRes.data
-
-                        setProfile({
-                            id: userData.id,
-                            name: userData.name,
-                            is_online: userData.is_online,
-                            availability: userData.availability,
-                            average_rating: userData.average_rating,
-                            total_reviews: userData.total_reviews,
-                        })
-
                         const reviewsRes = await api.get(`/users/${userId}/reviews/`)
                         const reviewsData = Array.isArray(reviewsRes.data)
                             ? reviewsRes.data
                             : (reviewsRes.data?.results ?? [])
                         setReviews(reviewsData)
-                    } catch (err: any) {
-                        console.error('Failed to fetch public profile', err)
-                        setProfile(null)
-                        setErrorMsg(err.response?.data?.detail || 'User not found')
-                    }
+                    } catch { /* ignore */ }
+
+                    // Fetch active posts
+                    try {
+                        const postsRes = await api.get(`/posts/?creator=${userId}`)
+                        const postsData = Array.isArray(postsRes.data)
+                            ? postsRes.data
+                            : (postsRes.data?.results ?? [])
+                        setPosts(postsData)
+                    } catch { /* ignore */ }
                 }
-            } catch (error) {
+
+            } catch (error: any) {
                 console.error('Failed to fetch profile:', error)
+                setErrorMsg(error.response?.data?.detail || 'User not found')
+                setProfile(null)
             } finally {
                 setIsLoading(false)
             }
         }
 
         loadProfile()
-    }, [username, isOwnProfile, fetchProfile, currentUser])
+    }, [username, isOwnProfile, fetchProfile, currentUser, isAuthenticated])
 
-    const handleConnect = async () => {
-        if (!profile || !currentUser) return
+    const handleConnect = async (post: LearningPost) => {
+        if (!currentUser) return // Should be handled by UI state
 
-        setIsConnecting(true)
+        setConnectingPostId(post.id)
         try {
-            // Create a session with this user
-            // Direct Connect (session without learning request)
-            const session = await createSession(profile.id)
+            const session = await createSession(post.creator_id, post.id)
             navigate(`/session/${session.id}`)
         } catch (error) {
             console.error('Failed to start session:', error)
             alert('Failed to start session. Please try again.')
         } finally {
-            setIsConnecting(false)
+            setConnectingPostId(null)
         }
     }
 
@@ -169,7 +165,7 @@ export default function ProfilePage() {
     const avgRating = profile.average_rating ?? 0
 
     return (
-        <div className="max-w-3xl mx-auto space-y-6 animate-fade-in">
+        <div className="max-w-3xl mx-auto space-y-8 animate-fade-in">
             {/* Profile Header */}
             <div className="card">
                 <div className="flex items-center gap-6">
@@ -211,19 +207,6 @@ export default function ProfilePage() {
                             <p className="text-slate-400 text-sm">Credits</p>
                         </div>
                     )}
-
-                    {/* Actions for other users */}
-                    {!isOwnProfile && (
-                        <div className="flex gap-2">
-                            <button
-                                onClick={handleConnect}
-                                disabled={isConnecting}
-                                className="btn-primary"
-                            >
-                                {isConnecting ? 'Starting...' : 'Start Session & Chat'}
-                            </button>
-                        </div>
-                    )}
                 </div>
             </div>
 
@@ -251,6 +234,64 @@ export default function ProfilePage() {
                     )}
                 </div>
             </div>
+
+            {/* Active Learning Requests - NEW SECTION */}
+            <section aria-labelledby="requests-heading">
+                <h2 id="requests-heading" className="text-lg font-semibold mb-4 text-slate-300">
+                    Active Learning Requests
+                </h2>
+                {posts.length === 0 ? (
+                    <div className="card text-center py-8 text-slate-400 italic">
+                        No active requests from {profile.name}
+                    </div>
+                ) : (
+                    <div className="space-y-4">
+                        {posts.map((post) => (
+                            <div key={post.id} className="card hover:border-primary/50 transition-colors flex items-center justify-between gap-4">
+                                <div>
+                                    <p className="text-lg">
+                                        Wants to learn <span className="text-primary-light font-bold">{post.topic_to_learn}</span>
+                                    </p>
+                                    {post.topic_to_teach && (
+                                        <p className="text-slate-400 text-sm mt-1">
+                                            Can teach: <span className="text-accent">{post.topic_to_teach}</span>
+                                        </p>
+                                    )}
+                                    <div className="flex items-center gap-2 mt-2">
+                                        {post.ok_with_just_learning && (
+                                            <span className="inline-block px-2 py-1 bg-amber-500/20 text-amber-400 text-xs rounded">
+                                                Learning only
+                                            </span>
+                                        )}
+                                        {post.bounty_enabled && (
+                                            <span className="inline-block px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded">
+                                                💰 Bounty
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+
+                                {!isOwnProfile && (
+                                    <button
+                                        onClick={() => handleConnect(post)}
+                                        disabled={connectingPostId === post.id}
+                                        className="btn-primary"
+                                    >
+                                        {connectingPostId === post.id ? (
+                                            <span className="flex items-center gap-2">
+                                                <span className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                                Connecting...
+                                            </span>
+                                        ) : (
+                                            'Connect'
+                                        )}
+                                    </button>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </section>
 
             {/* Reviews Section */}
             <section>
