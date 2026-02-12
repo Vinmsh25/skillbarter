@@ -94,7 +94,7 @@ class PresenceConsumer(BaseConsumer):
     def set_user_online(self, is_online):
         """Update user's online status in database."""
         self.user.is_online = is_online
-        self.user.save()
+        self.user.save(update_fields=['is_online'])
         
     @database_sync_to_async
     def get_online_users(self):

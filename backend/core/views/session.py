@@ -252,6 +252,10 @@ class SessionViewSet(viewsets.ModelViewSet):
         with transaction.atomic():
             # User1 taught, User2 learns
             if user1_teaching_seconds > 0:
+                # Refresh from DB to get latest credits
+                session.user1.refresh_from_db()
+                session.user2.refresh_from_db()
+                
                 credits_needed = calculate_credits(user1_teaching_seconds)
                 
                 # Check learner (user2) balance
@@ -288,6 +292,10 @@ class SessionViewSet(viewsets.ModelViewSet):
             
             # User2 taught, User1 learns
             if user2_teaching_seconds > 0:
+                # Refresh from DB to get latest credits
+                session.user1.refresh_from_db()
+                session.user2.refresh_from_db()
+
                 credits_needed = calculate_credits(user2_teaching_seconds)
                 
                 # Check learner (user1) balance
