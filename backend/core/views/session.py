@@ -41,6 +41,30 @@ class SessionViewSet(viewsets.ModelViewSet):
         if self.action == 'create':
             return SessionCreateSerializer
         return SessionSerializer
+
+    def create(self, request, *args, **kwargs):
+        """
+        Create a new session.
+        If an active session already exists with this user, return it (Idempotent).
+        """
+        user2_data = request.data.get('user2')
+        if user2_data:
+            try:
+                from django.db.models import Q
+                # Check for existing active session (Direct lookup handles ID text/int)
+                # We use user2_id to match the FK field directly
+                existing = Session.objects.filter(
+                    (Q(user1=request.user, user2_id=user2_data) | Q(user1__id=user2_data, user2=request.user)),
+                    is_active=True
+                ).first()
+
+                if existing:
+                    return Response(SessionSerializer(existing).data, status=status.HTTP_200_OK)
+            except Exception:
+                # If any error in lookup (e.g. invalid ID format), fall back to standard create
+                pass
+
+        return super().create(request, *args, **kwargs)
     
     @action(detail=True, methods=['post'], url_path='timer/start')
     def start_timer(self, request, pk=None):
@@ -157,6 +181,42 @@ class SessionViewSet(viewsets.ModelViewSet):
             'session': SessionSerializer(session).data,
             'credit_summary': credit_summary
         })
+
+    @action(detail=False, methods=['post'], url_path='dm/(?P<user_id>\\d+)')
+    def get_dm_session(self, request, user_id=None):
+        """
+        Get or create a direct message (DM) session with another user.
+        If an active session exists, return it.
+        If not, create a new session without a learning request.
+        """
+        user = request.user
+        try:
+            target_user = User.objects.get(pk=user_id)
+        except User.DoesNotExist:
+            return Response({'error': 'User not found.'}, status=status.HTTP_404_NOT_FOUND)
+            
+        if user == target_user:
+            return Response({'error': 'Cannot chat with yourself.'}, status=status.HTTP_400_BAD_REQUEST)
+            
+        # Check for existing active session
+        from django.db.models import Q
+        active_session = Session.objects.filter(
+            (Q(user1=user, user2=target_user) | Q(user1=target_user, user2=user)),
+            is_active=True
+        ).first()
+        
+        if active_session:
+            return Response(SessionSerializer(active_session).data)
+            
+        # Create new session
+        # User1 is always the requester (current user)
+        session = Session.objects.create(
+            user1=user,
+            user2=target_user,
+            learning_request=None # DM session
+        )
+        
+        return Response(SessionSerializer(session).data, status=status.HTTP_201_CREATED)
     
     def _process_credit_transfers(self, session):
         """

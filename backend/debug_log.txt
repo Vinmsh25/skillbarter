@@ -1,0 +1,374 @@
+2026-02-12 10:04:37.351969 - DEBUG: JWTAuthMiddleware called for path: /ws/session/1/
+2026-02-12 10:04:37.352395 - DEBUG: JWTAuthMiddleware found token: eyJhbGciOi...
+2026-02-12 10:04:37.357425 - DEBUG: JWTAuthMiddleware called for path: /ws/chat/1/
+2026-02-12 10:04:37.357694 - DEBUG: JWTAuthMiddleware found token: eyJhbGciOi...
+2026-02-12 10:04:37.371865 - DEBUG: JWTAuthMiddleware resolved user: bachi7525@gmail.com (ID: 1)
+2026-02-12 10:04:37.372789 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:04:37.373821 - DEBUG: JWTAuthMiddleware resolved user: sudhamshbalabhadra@gmail.com (ID: 2)
+2026-02-12 10:04:37.376537 - SessionConsumer verification result: True
+2026-02-12 10:04:37.395559 - DEBUG: JWTAuthMiddleware called for path: /ws/chat/1/
+2026-02-12 10:04:37.434516 - DEBUG: JWTAuthMiddleware found token: eyJhbGciOi...
+2026-02-12 10:04:37.439943 - DEBUG: JWTAuthMiddleware called for path: /ws/session/1/
+2026-02-12 10:04:37.440204 - DEBUG: JWTAuthMiddleware found token: eyJhbGciOi...
+2026-02-12 10:04:37.441971 - DEBUG: JWTAuthMiddleware resolved user: bachi7525@gmail.com (ID: 1)
+2026-02-12 10:04:37.442721 - DEBUG: JWTAuthMiddleware resolved user: sudhamshbalabhadra@gmail.com (ID: 2)
+2026-02-12 10:04:37.443511 - SessionConsumer connecting. SessionId: 1, User: sudhamshbalabhadra@gmail.com
+2026-02-12 10:04:37.447660 - SessionConsumer verification result: True
+2026-02-12 10:04:38.346727 - DEBUG: JWTAuthMiddleware called for path: /ws/presence/
+2026-02-12 10:04:38.347025 - DEBUG: JWTAuthMiddleware found token: eyJhbGciOi...
+2026-02-12 10:04:38.353962 - DEBUG: JWTAuthMiddleware called for path: /ws/presence/
+2026-02-12 10:04:38.354295 - DEBUG: JWTAuthMiddleware found token: eyJhbGciOi...
+2026-02-12 10:04:38.355324 - DEBUG: JWTAuthMiddleware resolved user: sudhamshbalabhadra@gmail.com (ID: 2)
+2026-02-12 10:04:38.357887 - DEBUG: JWTAuthMiddleware resolved user: bachi7525@gmail.com (ID: 1)
+2026-02-12 10:05:40.341086 - DEBUG: JWTAuthMiddleware called for path: /ws/session/1/
+2026-02-12 10:05:40.341474 - DEBUG: JWTAuthMiddleware found token: eyJhbGciOi...
+2026-02-12 10:05:40.344553 - DEBUG: JWTAuthMiddleware called for path: /ws/chat/1/
+2026-02-12 10:05:40.345660 - DEBUG: JWTAuthMiddleware found token: eyJhbGciOi...
+2026-02-12 10:05:40.366593 - DEBUG: JWTAuthMiddleware resolved user: sudhamshbalabhadra@gmail.com (ID: 2)
+2026-02-12 10:05:40.367310 - BaseConsumer.connect called for user: sudhamshbalabhadra@gmail.com
+2026-02-12 10:05:40.367495 - SessionConsumer connecting. SessionId: 1, User: sudhamshbalabhadra@gmail.com
+2026-02-12 10:05:40.368140 - DEBUG: JWTAuthMiddleware resolved user: bachi7525@gmail.com (ID: 1)
+2026-02-12 10:05:40.369191 - BaseConsumer.connect called for user: bachi7525@gmail.com
+2026-02-12 10:05:40.371655 - SessionConsumer verification result: True
+2026-02-12 10:05:40.387220 - DEBUG: JWTAuthMiddleware called for path: /ws/chat/1/
+2026-02-12 10:05:40.387566 - DEBUG: JWTAuthMiddleware found token: eyJhbGciOi...
+2026-02-12 10:05:40.390825 - DEBUG: JWTAuthMiddleware called for path: /ws/session/1/
+2026-02-12 10:05:40.391112 - DEBUG: JWTAuthMiddleware found token: eyJhbGciOi...
+2026-02-12 10:05:40.392051 - DEBUG: JWTAuthMiddleware resolved user: sudhamshbalabhadra@gmail.com (ID: 2)
+2026-02-12 10:05:40.392770 - BaseConsumer.connect called for user: sudhamshbalabhadra@gmail.com
+2026-02-12 10:05:40.393636 - DEBUG: JWTAuthMiddleware resolved user: bachi7525@gmail.com (ID: 1)
+2026-02-12 10:05:40.394360 - BaseConsumer.connect called for user: bachi7525@gmail.com
+2026-02-12 10:05:40.395679 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:05:40.398725 - SessionConsumer verification result: True
+2026-02-12 10:05:41.352834 - DEBUG: JWTAuthMiddleware called for path: /ws/presence/
+2026-02-12 10:05:41.353276 - DEBUG: JWTAuthMiddleware found token: eyJhbGciOi...
+2026-02-12 10:05:41.356340 - DEBUG: JWTAuthMiddleware called for path: /ws/presence/
+2026-02-12 10:05:41.356770 - DEBUG: JWTAuthMiddleware found token: eyJhbGciOi...
+2026-02-12 10:05:41.357740 - DEBUG: JWTAuthMiddleware resolved user: bachi7525@gmail.com (ID: 1)
+2026-02-12 10:05:41.358915 - BaseConsumer.connect called for user: bachi7525@gmail.com
+2026-02-12 10:05:41.360963 - DEBUG: JWTAuthMiddleware resolved user: sudhamshbalabhadra@gmail.com (ID: 2)
+2026-02-12 10:05:41.361403 - BaseConsumer.connect called for user: sudhamshbalabhadra@gmail.com
+2026-02-12 10:05:55.355693 - DEBUG: JWTAuthMiddleware called for path: /ws/session/1/
+2026-02-12 10:05:55.356200 - DEBUG: JWTAuthMiddleware found token: eyJhbGciOi...
+2026-02-12 10:05:55.362419 - DEBUG: JWTAuthMiddleware called for path: /ws/session/1/
+2026-02-12 10:05:55.362674 - DEBUG: JWTAuthMiddleware found token: eyJhbGciOi...
+2026-02-12 10:05:55.396222 - DEBUG: JWTAuthMiddleware resolved user: bachi7525@gmail.com (ID: 1)
+2026-02-12 10:05:55.397423 - BaseConsumer.connect called for user: bachi7525@gmail.com
+2026-02-12 10:05:55.397780 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:05:55.401612 - DEBUG: JWTAuthMiddleware resolved user: sudhamshbalabhadra@gmail.com (ID: 2)
+2026-02-12 10:05:55.402271 - BaseConsumer.connect called for user: sudhamshbalabhadra@gmail.com
+2026-02-12 10:05:55.402691 - SessionConsumer connecting. SessionId: 1, User: sudhamshbalabhadra@gmail.com
+2026-02-12 10:05:55.406700 - SessionConsumer verification result: True
+2026-02-12 10:05:55.411515 - BaseConsumer.connect accepted connection for user: bachi7525@gmail.com
+2026-02-12 10:05:55.414054 - SessionConsumer verification result: True
+2026-02-12 10:05:55.417072 - BaseConsumer.connect accepted connection for user: sudhamshbalabhadra@gmail.com
+2026-02-12 10:05:55.427232 - BaseConsumer.on_connected completed successfully
+2026-02-12 10:05:55.430122 - DEBUG: JWTAuthMiddleware called for path: /ws/chat/1/
+2026-02-12 10:05:55.430871 - DEBUG: JWTAuthMiddleware found token: eyJhbGciOi...
+2026-02-12 10:05:55.435788 - DEBUG: JWTAuthMiddleware called for path: /ws/chat/1/
+2026-02-12 10:05:55.436136 - DEBUG: JWTAuthMiddleware found token: eyJhbGciOi...
+2026-02-12 10:05:55.436497 - BaseConsumer.on_connected completed successfully
+2026-02-12 10:05:55.437616 - DEBUG: JWTAuthMiddleware resolved user: bachi7525@gmail.com (ID: 1)
+2026-02-12 10:05:55.438224 - BaseConsumer.connect called for user: bachi7525@gmail.com
+2026-02-12 10:05:55.438583 - DEBUG: JWTAuthMiddleware resolved user: sudhamshbalabhadra@gmail.com (ID: 2)
+2026-02-12 10:05:55.438908 - BaseConsumer.connect called for user: sudhamshbalabhadra@gmail.com
+2026-02-12 10:05:55.442553 - BaseConsumer.connect accepted connection for user: bachi7525@gmail.com
+2026-02-12 10:05:55.444184 - BaseConsumer.connect accepted connection for user: sudhamshbalabhadra@gmail.com
+2026-02-12 10:05:55.444561 - BaseConsumer.on_connected completed successfully
+2026-02-12 10:05:55.446390 - BaseConsumer.on_connected completed successfully
+2026-02-12 10:05:56.376071 - DEBUG: JWTAuthMiddleware called for path: /ws/presence/
+2026-02-12 10:05:56.376585 - DEBUG: JWTAuthMiddleware found token: eyJhbGciOi...
+2026-02-12 10:05:56.387333 - DEBUG: JWTAuthMiddleware called for path: /ws/presence/
+2026-02-12 10:05:56.391664 - DEBUG: JWTAuthMiddleware found token: eyJhbGciOi...
+2026-02-12 10:05:56.392750 - DEBUG: JWTAuthMiddleware resolved user: bachi7525@gmail.com (ID: 1)
+2026-02-12 10:05:56.393284 - BaseConsumer.connect called for user: bachi7525@gmail.com
+2026-02-12 10:05:56.407178 - BaseConsumer.connect accepted connection for user: bachi7525@gmail.com
+2026-02-12 10:05:56.417437 - DEBUG: JWTAuthMiddleware resolved user: sudhamshbalabhadra@gmail.com (ID: 2)
+2026-02-12 10:05:56.418077 - BaseConsumer.connect called for user: sudhamshbalabhadra@gmail.com
+2026-02-12 10:05:56.428091 - BaseConsumer.connect accepted connection for user: sudhamshbalabhadra@gmail.com
+2026-02-12 10:05:56.480541 - BaseConsumer.on_connected completed successfully
+2026-02-12 10:05:56.481357 - BaseConsumer.on_connected completed successfully
+2026-02-12 10:06:10.350985 - DEBUG: JWTAuthMiddleware called for path: /ws/session/1/
+2026-02-12 10:06:10.351465 - DEBUG: JWTAuthMiddleware found token: eyJhbGciOi...
+2026-02-12 10:06:10.384077 - DEBUG: JWTAuthMiddleware called for path: /ws/session/1/
+2026-02-12 10:06:10.384361 - DEBUG: JWTAuthMiddleware found token: eyJhbGciOi...
+2026-02-12 10:06:10.399387 - DEBUG: JWTAuthMiddleware resolved user: bachi7525@gmail.com (ID: 1)
+2026-02-12 10:06:10.400026 - BaseConsumer.connect called for user: bachi7525@gmail.com
+2026-02-12 10:06:10.400154 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:06:10.401445 - DEBUG: JWTAuthMiddleware resolved user: sudhamshbalabhadra@gmail.com (ID: 2)
+2026-02-12 10:06:10.401689 - BaseConsumer.connect called for user: sudhamshbalabhadra@gmail.com
+2026-02-12 10:06:10.402019 - SessionConsumer connecting. SessionId: 1, User: sudhamshbalabhadra@gmail.com
+2026-02-12 10:06:10.405146 - SessionConsumer verification result: True
+2026-02-12 10:06:10.407353 - BaseConsumer.connect accepted connection for user: bachi7525@gmail.com
+2026-02-12 10:06:10.407499 - SessionConsumer.on_connected start
+2026-02-12 10:06:10.408981 - SessionConsumer verification result: True
+2026-02-12 10:06:10.412466 - BaseConsumer.connect accepted connection for user: sudhamshbalabhadra@gmail.com
+2026-02-12 10:06:10.412591 - SessionConsumer.on_connected start
+2026-02-12 10:06:10.420271 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:06:10.420571 - SessionConsumer.on_connected end
+2026-02-12 10:06:10.420704 - BaseConsumer.on_connected completed successfully
+2026-02-12 10:06:10.425465 - DEBUG: JWTAuthMiddleware called for path: /ws/chat/1/
+2026-02-12 10:06:10.425631 - DEBUG: JWTAuthMiddleware found token: eyJhbGciOi...
+2026-02-12 10:06:10.428121 - DEBUG: JWTAuthMiddleware called for path: /ws/chat/1/
+2026-02-12 10:06:10.428252 - DEBUG: JWTAuthMiddleware found token: eyJhbGciOi...
+2026-02-12 10:06:10.428561 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:06:10.428756 - SessionConsumer.on_connected end
+2026-02-12 10:06:10.429573 - BaseConsumer.on_connected completed successfully
+2026-02-12 10:06:10.430851 - DEBUG: JWTAuthMiddleware resolved user: bachi7525@gmail.com (ID: 1)
+2026-02-12 10:06:10.431244 - BaseConsumer.connect called for user: bachi7525@gmail.com
+2026-02-12 10:06:10.431656 - DEBUG: JWTAuthMiddleware resolved user: sudhamshbalabhadra@gmail.com (ID: 2)
+2026-02-12 10:06:10.432291 - BaseConsumer.connect called for user: sudhamshbalabhadra@gmail.com
+2026-02-12 10:06:10.437029 - BaseConsumer.connect accepted connection for user: bachi7525@gmail.com
+2026-02-12 10:06:10.437774 - BaseConsumer.connect accepted connection for user: sudhamshbalabhadra@gmail.com
+2026-02-12 10:06:10.438133 - BaseConsumer.on_connected completed successfully
+2026-02-12 10:06:10.439019 - BaseConsumer.on_connected completed successfully
+2026-02-12 10:06:11.350138 - DEBUG: JWTAuthMiddleware called for path: /ws/presence/
+2026-02-12 10:06:11.350525 - DEBUG: JWTAuthMiddleware found token: eyJhbGciOi...
+2026-02-12 10:06:11.353148 - DEBUG: JWTAuthMiddleware called for path: /ws/presence/
+2026-02-12 10:06:11.353379 - DEBUG: JWTAuthMiddleware found token: eyJhbGciOi...
+2026-02-12 10:06:11.356391 - DEBUG: JWTAuthMiddleware resolved user: sudhamshbalabhadra@gmail.com (ID: 2)
+2026-02-12 10:06:11.356884 - BaseConsumer.connect called for user: sudhamshbalabhadra@gmail.com
+2026-02-12 10:06:11.367103 - BaseConsumer.connect accepted connection for user: sudhamshbalabhadra@gmail.com
+2026-02-12 10:06:11.370753 - DEBUG: JWTAuthMiddleware resolved user: bachi7525@gmail.com (ID: 1)
+2026-02-12 10:06:11.371193 - BaseConsumer.connect called for user: bachi7525@gmail.com
+2026-02-12 10:06:11.374343 - BaseConsumer.connect accepted connection for user: bachi7525@gmail.com
+2026-02-12 10:06:11.402522 - BaseConsumer.on_connected completed successfully
+2026-02-12 10:06:11.406580 - BaseConsumer.on_connected completed successfully
+2026-02-12 10:06:56.378006 - BaseConsumer.connect called for user: bachi7525@gmail.com
+2026-02-12 10:06:56.379651 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:06:56.380256 - BaseConsumer.connect called for user: sudhamshbalabhadra@gmail.com
+2026-02-12 10:06:56.380445 - SessionConsumer connecting. SessionId: 1, User: sudhamshbalabhadra@gmail.com
+2026-02-12 10:06:56.385951 - SessionConsumer verification result: True
+2026-02-12 10:06:56.387659 - BaseConsumer.connect accepted connection for user: bachi7525@gmail.com
+2026-02-12 10:06:56.388832 - SessionConsumer.on_connected start
+2026-02-12 10:06:56.390078 - SessionConsumer verification result: True
+2026-02-12 10:06:56.392032 - BaseConsumer.connect accepted connection for user: sudhamshbalabhadra@gmail.com
+2026-02-12 10:06:56.392251 - SessionConsumer.on_connected start
+2026-02-12 10:06:56.407714 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:06:56.408060 - SessionConsumer.on_connected end
+2026-02-12 10:06:56.408233 - BaseConsumer.on_connected completed successfully
+2026-02-12 10:06:56.415964 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:06:56.417097 - SessionConsumer.on_connected end
+2026-02-12 10:06:56.417237 - BaseConsumer.on_connected completed successfully
+2026-02-12 10:06:56.417954 - BaseConsumer.connect called for user: bachi7525@gmail.com
+2026-02-12 10:06:56.418186 - BaseConsumer.connect called for user: sudhamshbalabhadra@gmail.com
+2026-02-12 10:06:56.422585 - BaseConsumer.connect accepted connection for user: bachi7525@gmail.com
+2026-02-12 10:06:56.423216 - BaseConsumer.connect accepted connection for user: sudhamshbalabhadra@gmail.com
+2026-02-12 10:06:56.423551 - BaseConsumer.on_connected completed successfully
+2026-02-12 10:06:56.424218 - BaseConsumer.on_connected completed successfully
+2026-02-12 10:06:57.345306 - BaseConsumer.connect called for user: sudhamshbalabhadra@gmail.com
+2026-02-12 10:06:57.347569 - BaseConsumer.connect accepted connection for user: sudhamshbalabhadra@gmail.com
+2026-02-12 10:06:57.351112 - BaseConsumer.connect called for user: bachi7525@gmail.com
+2026-02-12 10:06:57.360940 - BaseConsumer.connect accepted connection for user: bachi7525@gmail.com
+2026-02-12 10:06:57.419906 - BaseConsumer.on_connected completed successfully
+2026-02-12 10:06:57.420429 - BaseConsumer.on_connected completed successfully
+2026-02-12 10:07:01.371267 - SessionConsumer connecting. SessionId: 1, User: sudhamshbalabhadra@gmail.com
+2026-02-12 10:07:01.375510 - SessionConsumer verification result: True
+2026-02-12 10:07:01.377661 - SessionConsumer.on_connected start
+2026-02-12 10:07:01.386539 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:07:01.386779 - SessionConsumer.on_connected end
+2026-02-12 10:07:01.397507 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:07:01.400202 - SessionConsumer verification result: True
+2026-02-12 10:07:01.406484 - SessionConsumer.on_connected start
+2026-02-12 10:07:01.412369 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:07:01.412630 - SessionConsumer.on_connected end
+2026-02-12 10:07:54.051571 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:07:54.074304 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:07:54.094701 - SessionConsumer verification result: True
+2026-02-12 10:07:54.098328 - SessionConsumer.on_connected start
+2026-02-12 10:07:54.107550 - SessionConsumer verification result: True
+2026-02-12 10:07:54.114725 - SessionConsumer.on_connected start
+2026-02-12 10:07:54.137660 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:07:54.143778 - SessionConsumer.on_connected end
+2026-02-12 10:07:54.156286 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:07:54.157187 - SessionConsumer.on_connected end
+2026-02-12 10:08:02.978194 - SessionConsumer connecting. SessionId: 1, User: sudhamshbalabhadra@gmail.com
+2026-02-12 10:08:03.038464 - SessionConsumer connecting. SessionId: 1, User: sudhamshbalabhadra@gmail.com
+2026-02-12 10:08:03.042773 - SessionConsumer verification result: True
+2026-02-12 10:08:03.043407 - SessionConsumer.on_connected start
+2026-02-12 10:08:03.051750 - SessionConsumer verification result: True
+2026-02-12 10:08:03.054009 - SessionConsumer.on_connected start
+2026-02-12 10:08:03.077595 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:08:03.081281 - SessionConsumer.on_connected end
+2026-02-12 10:08:03.095068 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:08:03.095979 - SessionConsumer.on_connected end
+2026-02-12 10:08:27.616608 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:08:27.621611 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:08:27.639991 - SessionConsumer verification result: True
+2026-02-12 10:08:27.646368 - SessionConsumer.on_connected start
+2026-02-12 10:08:27.658593 - SessionConsumer verification result: True
+2026-02-12 10:08:27.671514 - SessionConsumer.on_connected start
+2026-02-12 10:08:27.680355 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:08:27.680864 - SessionConsumer.on_connected end
+2026-02-12 10:08:27.703920 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:08:27.709952 - SessionConsumer.on_connected end
+2026-02-12 10:09:22.625281 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:09:22.633179 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:09:22.668761 - SessionConsumer verification result: True
+2026-02-12 10:09:22.669002 - SessionConsumer.on_connected start
+2026-02-12 10:09:22.691747 - SessionConsumer verification result: True
+2026-02-12 10:09:22.712607 - SessionConsumer.on_connected start
+2026-02-12 10:09:22.750869 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:09:22.757490 - SessionConsumer.on_connected end
+2026-02-12 10:09:22.773306 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:09:22.774234 - SessionConsumer.on_connected end
+2026-02-12 10:11:17.171726 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:11:17.197051 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:11:17.229822 - SessionConsumer verification result: True
+2026-02-12 10:11:17.234549 - SessionConsumer.on_connected start
+2026-02-12 10:11:17.245464 - SessionConsumer verification result: True
+2026-02-12 10:11:17.248225 - SessionConsumer.on_connected start
+2026-02-12 10:11:17.288825 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:11:17.289493 - SessionConsumer.on_connected end
+2026-02-12 10:11:17.326520 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:11:17.328335 - SessionConsumer.on_connected end
+2026-02-12 10:11:40.752254 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:11:40.755406 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:11:40.779462 - SessionConsumer verification result: True
+2026-02-12 10:11:40.780843 - SessionConsumer.on_connected start
+2026-02-12 10:11:40.793841 - SessionConsumer verification result: True
+2026-02-12 10:11:40.797898 - SessionConsumer.on_connected start
+2026-02-12 10:11:40.807276 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:11:40.807992 - SessionConsumer.on_connected end
+2026-02-12 10:11:40.828891 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:11:40.829868 - SessionConsumer.on_connected end
+2026-02-12 10:13:40.193469 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:13:40.211519 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:13:40.230905 - SessionConsumer verification result: True
+2026-02-12 10:13:40.234016 - SessionConsumer.on_connected start
+2026-02-12 10:13:40.245881 - SessionConsumer verification result: True
+2026-02-12 10:13:40.254068 - SessionConsumer.on_connected start
+2026-02-12 10:13:40.269289 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:13:40.269955 - SessionConsumer.on_connected end
+2026-02-12 10:13:40.297590 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:13:40.298514 - SessionConsumer.on_connected end
+2026-02-12 10:15:07.392362 - SessionConsumer connecting. SessionId: 1, User: sudhamshbalabhadra@gmail.com
+2026-02-12 10:15:07.396201 - SessionConsumer verification result: True
+2026-02-12 10:15:07.397126 - SessionConsumer.on_connected start
+2026-02-12 10:15:07.403618 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:15:07.404087 - SessionConsumer.on_connected end
+2026-02-12 10:15:07.425896 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:15:07.427794 - SessionConsumer verification result: True
+2026-02-12 10:15:07.428417 - SessionConsumer.on_connected start
+2026-02-12 10:15:07.433759 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:15:07.434437 - SessionConsumer.on_connected end
+2026-02-12 10:15:18.735988 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:15:18.746275 - SessionConsumer verification result: True
+2026-02-12 10:15:18.747834 - SessionConsumer.on_connected start
+2026-02-12 10:15:18.787235 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:15:18.792152 - SessionConsumer.on_connected end
+2026-02-12 10:15:18.810210 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:15:18.825347 - SessionConsumer verification result: True
+2026-02-12 10:15:18.826495 - SessionConsumer.on_connected start
+2026-02-12 10:15:18.858457 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:15:18.860922 - SessionConsumer.on_connected end
+2026-02-12 10:15:53.616556 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:15:53.645852 - SessionConsumer verification result: True
+2026-02-12 10:15:53.647404 - SessionConsumer.on_connected start
+2026-02-12 10:15:53.650733 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:15:53.678775 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:15:53.679546 - SessionConsumer.on_connected end
+2026-02-12 10:15:53.690217 - SessionConsumer verification result: True
+2026-02-12 10:15:53.691633 - SessionConsumer.on_connected start
+2026-02-12 10:15:53.728401 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:15:53.729359 - SessionConsumer.on_connected end
+2026-02-12 10:17:38.373194 - SessionConsumer connecting. SessionId: 1, User: sudhamshbalabhadra@gmail.com
+2026-02-12 10:17:38.381780 - SessionConsumer verification result: True
+2026-02-12 10:17:38.382237 - SessionConsumer.on_connected start
+2026-02-12 10:17:38.383423 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:17:38.388566 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:17:38.389620 - SessionConsumer.on_connected end
+2026-02-12 10:17:38.390898 - SessionConsumer verification result: True
+2026-02-12 10:17:38.391554 - SessionConsumer.on_connected start
+2026-02-12 10:17:38.450675 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:17:38.454027 - SessionConsumer.on_connected end
+2026-02-12 10:17:51.842365 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:17:51.859202 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:17:51.927078 - SessionConsumer verification result: True
+2026-02-12 10:17:51.929257 - SessionConsumer.on_connected start
+2026-02-12 10:17:51.939142 - SessionConsumer verification result: True
+2026-02-12 10:17:51.943380 - SessionConsumer.on_connected start
+2026-02-12 10:17:51.962195 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:17:51.970403 - SessionConsumer.on_connected end
+2026-02-12 10:17:51.983697 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:17:51.985261 - SessionConsumer.on_connected end
+2026-02-12 10:17:53.295593 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:17:53.308812 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:17:53.326740 - SessionConsumer verification result: True
+2026-02-12 10:17:53.330291 - SessionConsumer.on_connected start
+2026-02-12 10:17:53.344566 - SessionConsumer verification result: True
+2026-02-12 10:17:53.368378 - SessionConsumer.on_connected start
+2026-02-12 10:17:53.392432 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:17:53.393014 - SessionConsumer.on_connected end
+2026-02-12 10:17:53.414304 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:17:53.414915 - SessionConsumer.on_connected end
+2026-02-12 10:18:01.843299 - SessionConsumer connecting. SessionId: 1, User: sudhamshbalabhadra@gmail.com
+2026-02-12 10:18:01.854033 - SessionConsumer connecting. SessionId: 1, User: sudhamshbalabhadra@gmail.com
+2026-02-12 10:18:01.872995 - SessionConsumer verification result: True
+2026-02-12 10:18:01.873675 - SessionConsumer.on_connected start
+2026-02-12 10:18:01.899623 - SessionConsumer verification result: True
+2026-02-12 10:18:01.917539 - SessionConsumer.on_connected start
+2026-02-12 10:18:01.938270 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:18:01.943461 - SessionConsumer.on_connected end
+2026-02-12 10:18:01.960798 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:18:01.962743 - SessionConsumer.on_connected end
+2026-02-12 10:18:22.054026 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:18:22.057136 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:18:22.082029 - SessionConsumer verification result: True
+2026-02-12 10:18:22.082978 - SessionConsumer.on_connected start
+2026-02-12 10:18:22.109032 - SessionConsumer verification result: True
+2026-02-12 10:18:22.115884 - SessionConsumer.on_connected start
+2026-02-12 10:18:22.136113 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:18:22.148780 - SessionConsumer.on_connected end
+2026-02-12 10:18:22.176221 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:18:22.177379 - SessionConsumer.on_connected end
+2026-02-12 10:18:42.095455 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:18:42.127459 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:18:42.129046 - SessionConsumer verification result: True
+2026-02-12 10:18:42.129340 - SessionConsumer.on_connected start
+2026-02-12 10:18:42.144157 - SessionConsumer verification result: True
+2026-02-12 10:18:42.156668 - SessionConsumer.on_connected start
+2026-02-12 10:18:42.187121 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:18:42.195176 - SessionConsumer.on_connected end
+2026-02-12 10:18:42.219969 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:18:42.221936 - SessionConsumer.on_connected end
+2026-02-12 10:18:53.581999 - SessionConsumer connecting. SessionId: 1, User: sudhamshbalabhadra@gmail.com
+2026-02-12 10:18:53.611179 - SessionConsumer connecting. SessionId: 1, User: sudhamshbalabhadra@gmail.com
+2026-02-12 10:18:53.632724 - SessionConsumer verification result: True
+2026-02-12 10:18:53.633317 - SessionConsumer.on_connected start
+2026-02-12 10:18:53.670770 - SessionConsumer verification result: True
+2026-02-12 10:18:53.673680 - SessionConsumer.on_connected start
+2026-02-12 10:18:53.693289 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:18:53.696195 - SessionConsumer.on_connected end
+2026-02-12 10:18:53.720508 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:18:53.721590 - SessionConsumer.on_connected end
+2026-02-12 10:22:43.371094 - SessionConsumer connecting. SessionId: 1, User: sudhamshbalabhadra@gmail.com
+2026-02-12 10:22:43.373654 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:22:43.380014 - SessionConsumer verification result: True
+2026-02-12 10:22:43.382159 - SessionConsumer.on_connected start
+2026-02-12 10:22:43.389902 - SessionConsumer verification result: True
+2026-02-12 10:22:43.395973 - SessionConsumer.on_connected start
+2026-02-12 10:22:43.410831 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:22:43.411803 - SessionConsumer.on_connected end
+2026-02-12 10:22:43.444780 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:22:43.448325 - SessionConsumer.on_connected end
+2026-02-12 10:23:25.512233 - SessionConsumer connecting. SessionId: 1, User: sudhamshbalabhadra@gmail.com
+2026-02-12 10:23:25.535758 - SessionConsumer verification result: True
+2026-02-12 10:23:25.540457 - SessionConsumer.on_connected start
+2026-02-12 10:23:25.600910 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:23:25.607513 - SessionConsumer.on_connected end
+2026-02-12 10:23:25.619140 - SessionConsumer connecting. SessionId: 1, User: sudhamshbalabhadra@gmail.com
+2026-02-12 10:23:25.642077 - SessionConsumer verification result: True
+2026-02-12 10:23:25.644255 - SessionConsumer.on_connected start
+2026-02-12 10:23:25.689219 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:23:25.691238 - SessionConsumer.on_connected end
+2026-02-12 10:23:42.977575 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:23:42.990867 - SessionConsumer verification result: True
+2026-02-12 10:23:42.993531 - SessionConsumer.on_connected start
+2026-02-12 10:23:43.028328 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:23:43.029234 - SessionConsumer.on_connected end
+2026-02-12 10:23:43.054669 - SessionConsumer connecting. SessionId: 1, User: bachi7525@gmail.com
+2026-02-12 10:23:43.068964 - SessionConsumer verification result: True
+2026-02-12 10:23:43.070420 - SessionConsumer.on_connected start
+2026-02-12 10:23:43.092061 - SessionConsumer.on_connected got data: ['id', 'user1', 'user1_name', 'user2', 'user2_name', 'learning_request', 'start_time', 'end_time', 'is_active', 'total_duration', 'user1_teaching_time', 'user2_teaching_time', 'active_timer']
+2026-02-12 10:23:43.093102 - SessionConsumer.on_connected end

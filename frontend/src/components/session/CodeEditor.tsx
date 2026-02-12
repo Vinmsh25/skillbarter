@@ -41,7 +41,7 @@ export default function CodeEditor({ sessionId, isVisible, onCodeChange }: CodeE
     const [files, setFiles] = useState<FileEntry[]>([
         { name: 'main.py', language: 'python', content: LANGUAGE_TEMPLATES.python },
         { name: 'solution.cpp', language: 'cpp', content: LANGUAGE_TEMPLATES.cpp },
-        { name: 'App.java', language: 'java', content: LANGUAGE_TEMPLATES.java },
+        { name: 'Main.java', language: 'java', content: LANGUAGE_TEMPLATES.java },
     ])
     const [activeFileIndex, setActiveFileIndex] = useState(0)
     const activeFile = files[activeFileIndex] || files[0]
@@ -57,13 +57,48 @@ export default function CodeEditor({ sessionId, isVisible, onCodeChange }: CodeE
         if (saved) {
             try {
                 const parsed = JSON.parse(saved)
-                if (parsed.files && parsed.files.length > 0) setFiles(parsed.files)
+                if (parsed.files && parsed.files.length > 0) {
+                    // Aggressive fix for corrupted state
+                    const fixedFiles = parsed.files.map((f: FileEntry) => {
+                        // 1. Rename App.java to Main.java
+                        if (f.name === 'App.java') {
+                            f.name = 'Main.java';
+                        }
+
+                        // 2. Validate content matches extension
+                        if (f.name.endsWith('.java') && (f.content.includes('#include') || f.content.includes('import React'))) {
+                            return { ...f, content: LANGUAGE_TEMPLATES.java }
+                        }
+                        if (f.name.endsWith('.py') && (f.content.includes('public class') || f.content.includes('#include'))) {
+                            return { ...f, content: LANGUAGE_TEMPLATES.python }
+                        }
+                        if (f.name.endsWith('.cpp') && (f.content.includes('public class') || f.content.includes('def '))) {
+                            return { ...f, content: LANGUAGE_TEMPLATES.cpp }
+                        }
+
+                        // 3. Ensure Main.java has the correct class name if it was renamed/reset
+                        if (f.name === 'Main.java' && !f.content.includes('public class Main')) {
+                            return { ...f, content: LANGUAGE_TEMPLATES.java }
+                        }
+
+                        return f
+                    })
+                    setFiles(fixedFiles)
+                }
                 if (parsed.activeIndex !== undefined) setActiveFileIndex(parsed.activeIndex)
             } catch (e) {
                 console.error('Failed to parse saved IDE state', e)
             }
         }
     }, [sessionId])
+
+    // Create a stable debounced save function
+    const debouncedSave = useMemo(
+        () => throttle((files: FileEntry[], activeIndex: number) => {
+            localStorage.setItem(`ide_state_${sessionId}`, JSON.stringify({ files, activeIndex }))
+        }, 1000),
+        [sessionId]
+    )
 
     // Throttled broadcast
     const broadcastChange = useMemo(() =>
@@ -78,11 +113,16 @@ export default function CodeEditor({ sessionId, isVisible, onCodeChange }: CodeE
         }, 500),
         [onCodeChange])
 
-    // Save and broadcast helper
-    const saveAndBroadcast = (newFiles: FileEntry[], newIndex: number) => {
+    // Update state immediately, debounce storage/broadcast
+    const updateState = (newFiles: FileEntry[], newIndex: number) => {
+        // Essential: Update editor content if switching files
+        if (newIndex !== activeFileIndex && editorRef.current) {
+            editorRef.current.setValue(newFiles[newIndex].content)
+        }
+
         setFiles(newFiles)
         setActiveFileIndex(newIndex)
-        localStorage.setItem(`ide_state_${sessionId}`, JSON.stringify({ files: newFiles, activeIndex: newIndex }))
+        debouncedSave(newFiles, newIndex)
         broadcastChange(newFiles, newIndex)
     }
 
@@ -148,15 +188,14 @@ export default function CodeEditor({ sessionId, isVisible, onCodeChange }: CodeE
 
         const newFiles = [...files]
         newFiles[activeFileIndex] = { ...activeFile, content: newContent }
-        saveAndBroadcast(newFiles, activeFileIndex)
+
+        // Instant state update for responsiveness
+        updateState(newFiles, activeFileIndex)
     }, [files, activeFileIndex, activeFile])
 
     const selectFile = (index: number) => {
         if (index === activeFileIndex) return
-        saveAndBroadcast(files, index)
-        if (editorRef.current) {
-            editorRef.current.setValue(files[index].content)
-        }
+        updateState(files, index)
     }
 
     const addNewFile = () => {
@@ -175,7 +214,7 @@ export default function CodeEditor({ sessionId, isVisible, onCodeChange }: CodeE
 
         const newFiles = [...files, newFile]
         const newIndex = newFiles.length - 1
-        saveAndBroadcast(newFiles, newIndex)
+        updateState(newFiles, newIndex)
 
         setNewFileName('')
         setIsCreatingFile(false)
@@ -188,7 +227,7 @@ export default function CodeEditor({ sessionId, isVisible, onCodeChange }: CodeE
         if (!activeFile) return
         const newFiles = [...files]
         newFiles[activeFileIndex] = { ...activeFile, language: newLang }
-        saveAndBroadcast(newFiles, activeFileIndex)
+        updateState(newFiles, activeFileIndex)
     }
 
     const deleteFile = (e: React.MouseEvent, index: number) => {
@@ -201,9 +240,67 @@ export default function CodeEditor({ sessionId, isVisible, onCodeChange }: CodeE
             newIndex = Math.max(0, activeFileIndex - 1)
         }
 
-        saveAndBroadcast(newFiles, newIndex)
+        updateState(newFiles, newIndex)
         if (editorRef.current) {
             editorRef.current.setValue(newFiles[newIndex].content)
+        }
+    }
+    // Run Code State
+    const [isRunning, setIsRunning] = useState(false)
+    const [output, setOutput] = useState<{ stdout: string; stderr: string } | null>(null)
+    const [isOutputVisible, setIsOutputVisible] = useState(false)
+
+    const runCode = async () => {
+        if (!activeFile) return
+
+        setIsRunning(true)
+        setIsOutputVisible(true)
+        setOutput(null)
+
+        const languageMap: Record<string, string> = {
+            javascript: 'javascript',
+            python: 'python',
+            java: 'java',
+            cpp: 'cpp',
+            c: 'c',
+        }
+
+        // Piston API needs "python" not "py"
+        const lang = languageMap[activeFile.language] || activeFile.language
+
+        try {
+            // Use local backend proxy to avoid CORS
+            const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api'}/execute/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Add auth token if needed, though this endpoint is public for now
+                },
+                body: JSON.stringify({
+                    language: lang,
+                    version: '*',
+                    files: [{ content: activeFile.content }]
+                })
+            })
+
+            if (!response.ok) {
+                throw new Error(`Server returned ${response.status} ${response.statusText}`)
+            }
+
+            const data = await response.json()
+            if (data.run) {
+                setOutput({
+                    stdout: data.run.stdout,
+                    stderr: data.run.stderr
+                })
+            } else {
+                setOutput({ stdout: '', stderr: 'Failed to execute code' })
+            }
+        } catch (error) {
+            console.error('Run failed:', error)
+            setOutput({ stdout: '', stderr: 'Network error or execution failed' })
+        } finally {
+            setIsRunning(false)
         }
     }
 
@@ -246,6 +343,17 @@ export default function CodeEditor({ sessionId, isVisible, onCodeChange }: CodeE
                             </optgroup>
                         </select>
                     </div>
+
+                    <button
+                        onClick={runCode}
+                        disabled={isRunning}
+                        className={`flex items-center gap-2 px-4 py-1.5 rounded-lg font-bold text-xs tracking-wider transition-all ${isRunning
+                            ? 'bg-slate-700 text-slate-400 cursor-not-allowed'
+                            : 'bg-green-600 hover:bg-green-500 text-white shadow-lg shadow-green-900/20'
+                            }`}
+                    >
+                        {isRunning ? 'RUNNING...' : '▶ RUN'}
+                    </button>
                 </div>
 
                 <div className="flex items-center gap-3">
@@ -384,7 +492,10 @@ export default function CodeEditor({ sessionId, isVisible, onCodeChange }: CodeE
             </div>
 
             {/* Status Bar */}
-            <div className="bg-primary px-3 py-1 flex items-center justify-between text-[10px] font-bold text-white uppercase tracking-wider">
+            <div className="bg-primary px-3 py-1 flex items-center justify-between text-[10px] font-bold text-white uppercase tracking-wider cursor-pointer hover:bg-primary/90 transition-colors"
+                onClick={() => setIsOutputVisible(!isOutputVisible)}
+                title="Toggle Output Panel"
+            >
                 <div className="flex items-center gap-4">
                     <span className="flex items-center gap-1.5">
                         <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
@@ -395,8 +506,39 @@ export default function CodeEditor({ sessionId, isVisible, onCodeChange }: CodeE
                 <div className="flex items-center gap-4">
                     <span className="opacity-60">UTF-8</span>
                     <span>{activeFile?.language}</span>
+                    <span className="ml-2 bg-black/20 px-2 py-0.5 rounded">
+                        {isOutputVisible ? 'Hide Output ▼' : 'Show Output ▲'}
+                    </span>
                 </div>
             </div>
+
+            {/* Output Panel */}
+            {isOutputVisible && (
+                <div className="h-48 bg-[#1e1e1e] border-t border-white/10 flex flex-col font-mono text-xs">
+                    <div className="flex items-center justify-between px-4 py-1 bg-black/40 border-b border-white/5">
+                        <span className="font-bold text-slate-400">TERMINAL OUTPUT</span>
+                        <button
+                            onClick={(e) => { e.stopPropagation(); setOutput(null); }}
+                            className="text-[10px] text-slate-500 hover:text-white"
+                        >
+                            CLEAR
+                        </button>
+                    </div>
+                    <div className="flex-1 p-4 overflow-y-auto whitespace-pre-wrap">
+                        {isRunning ? (
+                            <span className="text-yellow-500 animate-pulse">Running code...</span>
+                        ) : output ? (
+                            <>
+                                {output.stdout && <div className="text-slate-300">{output.stdout}</div>}
+                                {output.stderr && <div className="text-red-400 mt-2">{output.stderr}</div>}
+                                {!output.stdout && !output.stderr && <div className="text-slate-500 italic">No output</div>}
+                            </>
+                        ) : (
+                            <span className="text-slate-600 italic">Run code to see output here...</span>
+                        )}
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

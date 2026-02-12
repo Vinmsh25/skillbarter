@@ -8,7 +8,7 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     """Serializer for user details."""
     
-    average_rating = serializers.FloatField(read_only=True)
+    average_rating = serializers.FloatField(read_only=True, allow_null=True)
     total_reviews = serializers.IntegerField(read_only=True)
     
     class Meta:
@@ -90,7 +90,7 @@ class UserUpdateSerializer(serializers.ModelSerializer):
 class UserPublicSerializer(serializers.ModelSerializer):
     """Public serializer for user info (no sensitive data)."""
     
-    average_rating = serializers.FloatField(read_only=True)
+    average_rating = serializers.FloatField(read_only=True, allow_null=True)
     total_reviews = serializers.IntegerField(read_only=True)
     
     class Meta:

@@ -20,6 +20,7 @@ from .views import (
     CreditTransactionListView,
     CreditBalanceView,
 )
+from .views.misc import execute_code
 
 # Create router for viewsets
 router = DefaultRouter()
@@ -59,6 +60,10 @@ urlpatterns = [
         name='user-reviews'
     ),
     
+    
+    # Utility endpoints
+    path('execute/', execute_code, name='execute-code'),
+
     # Router URLs (posts, sessions)
     path('', include(router.urls)),
 ]

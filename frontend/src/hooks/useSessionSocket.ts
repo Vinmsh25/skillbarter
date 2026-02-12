@@ -20,7 +20,7 @@ interface SessionSocketActions {
     sendCode: (data: unknown) => void
 }
 
-const WS_BASE = import.meta.env?.VITE_WS_URL || 'ws://127.0.0.1:8001'
+const WS_BASE = import.meta.env?.VITE_WS_URL || 'ws://127.0.0.1:8000'
 const RECONNECT_DELAY = 3000
 
 export function useSessionSocket(sessionId: string | number | undefined): SessionSocketState & SessionSocketActions {
@@ -33,12 +33,25 @@ export function useSessionSocket(sessionId: string | number | undefined): Sessio
     const socketRef = useRef<WebSocket | null>(null)
     const reconnectTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-    const { accessToken, isAuthenticated, user, updateCredits } = useAuthStore()
+    // Only subscribe to essential auth state changes that effectively require a reconnect (like token)
+    const accessToken = useAuthStore(state => state.accessToken)
+    const isAuthenticated = useAuthStore(state => state.isAuthenticated)
+    // For user ID and actions, we can access them directly or via getState to avoid re-triggering 'connect'
+    // However, if we want to update UI based on credits, we need local state (which we have: yourCredits)
 
     const connect = useCallback(() => {
         const id = String(sessionId)
-        if (!sessionId || id === 'undefined' || id === 'NaN' || !accessToken || !isAuthenticated) return
-        if (socketRef.current?.readyState === WebSocket.OPEN) return
+
+        if (!sessionId || id === 'undefined' || id === 'NaN' || !accessToken || !isAuthenticated) {
+            return
+        }
+
+        // Prevent double connection
+        if (socketRef.current) {
+            if (socketRef.current.readyState === WebSocket.OPEN || socketRef.current.readyState === WebSocket.CONNECTING) {
+                return
+            }
+        }
 
         if (reconnectTimeoutRef.current) {
             clearTimeout(reconnectTimeoutRef.current)
@@ -49,6 +62,7 @@ export function useSessionSocket(sessionId: string | number | undefined): Sessio
         const socket = new WebSocket(wsUrl)
 
         socket.onopen = () => {
+            console.log('DEBUG: Session WebSocket Connected')
             setIsConnected(true)
             setError(null)
         }
@@ -56,9 +70,15 @@ export function useSessionSocket(sessionId: string | number | undefined): Sessio
         socket.onmessage = (event) => {
             try {
                 const data = JSON.parse(event.data)
+                console.log('DEBUG: Session Socket Message', data.type)
+
+                // Access fresh store state without adding to dependencies
+                const currentUser = useAuthStore.getState().user
+                const updateCredits = useAuthStore.getState().updateCredits
 
                 switch (data.type) {
                     case 'session_state':
+                        console.log('DEBUG: Setting Session State', data.session)
                         setSession(data.session)
                         setActiveTimer(data.session.active_timer)
                         break
@@ -76,33 +96,18 @@ export function useSessionSocket(sessionId: string | number | undefined): Sessio
                         break
 
                     case 'timer_stopped':
-                        console.log('DEBUG: Timer stopped Payload:', data)
                         setActiveTimer(null)
-
                         if (data.new_total_time !== undefined) {
                             setSession(prev => {
-                                if (!prev) {
-                                    console.log('DEBUG: No previous session state')
-                                    return null
-                                }
-
+                                if (!prev) return null
                                 const user1Id = String(prev.user1)
                                 const teacherId = String(data.teacher_id)
-
-                                console.log(`DEBUG: Comparing IDs: Teacher=${teacherId} vs User1=${user1Id}`)
-
                                 if (teacherId === user1Id) {
-                                    console.log(`DEBUG: Updating User1 time to ${data.new_total_time}`)
-                                    const newState = { ...prev, user1_teaching_time: data.new_total_time }
-                                    console.log('DEBUG: New Session State:', newState)
-                                    return newState
+                                    return { ...prev, user1_teaching_time: data.new_total_time }
                                 } else {
-                                    console.log(`DEBUG: Updating User2 time to ${data.new_total_time}`)
                                     return { ...prev, user2_teaching_time: data.new_total_time }
                                 }
                             })
-                        } else {
-                            console.error('DEBUG: new_total_time is MISSING in payload!')
                         }
                         break
 
@@ -116,18 +121,17 @@ export function useSessionSocket(sessionId: string | number | undefined): Sessio
                         break
 
                     case 'credit_update':
-                        if (data.user_id === user?.id) {
+                        if (data.user_id === currentUser?.id) {
                             setYourCredits(data.new_balance)
                             updateCredits(data.new_balance)
                         }
                         break
 
                     case 'signal':
-                        // Dispatch generic signal event
                         if (data.payload) {
                             window.dispatchEvent(new CustomEvent('remote_peer_id', {
                                 detail: {
-                                    peerId: 'peer', // Dummy peerID if not provided, or update backend to send it
+                                    peerId: 'peer',
                                     ...data.payload
                                 }
                             }))
@@ -168,11 +172,13 @@ export function useSessionSocket(sessionId: string | number | undefined): Sessio
 
         socket.onerror = () => {
             setError('Connection error')
-            socket.close()
+            if (socket.readyState === WebSocket.OPEN) {
+                socket.close()
+            }
         }
 
         socketRef.current = socket
-    }, [sessionId, accessToken, isAuthenticated, user?.id, updateCredits])
+    }, [sessionId, accessToken, isAuthenticated])
 
     const disconnect = useCallback(() => {
         if (reconnectTimeoutRef.current) {
@@ -229,18 +235,23 @@ export function useSessionSocket(sessionId: string | number | undefined): Sessio
 
     // Connect on mount
     useEffect(() => {
+        console.log('DEBUG: useSessionSocket Effect Triggered', { sessionId, isAuthenticated, hasToken: !!accessToken })
         if (sessionId && isAuthenticated && accessToken) {
             connect()
         }
-        return () => disconnect()
+        return () => {
+            console.log('DEBUG: useSessionSocket Effect Cleanup')
+            disconnect()
+        }
     }, [sessionId, isAuthenticated, accessToken, connect, disconnect])
 
     // Initialize credits from user
     useEffect(() => {
+        const user = useAuthStore.getState().user
         if (user?.credits !== undefined) {
             setYourCredits(Number(user.credits))
         }
-    }, [user?.credits])
+    }, [isAuthenticated]) // Only reset on fresh auth, or we could listen to store changes cautiously
 
     return {
         isConnected,

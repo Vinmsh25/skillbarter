@@ -17,7 +17,7 @@ interface ChatSocketActions {
     reconnect: () => void
 }
 
-const WS_BASE = import.meta.env?.VITE_WS_URL || 'ws://127.0.0.1:8001'
+const WS_BASE = import.meta.env?.VITE_WS_URL || 'ws://127.0.0.1:8000'
 const RECONNECT_DELAY = 3000
 
 export function useChatSocket(sessionId: string | number | undefined): ChatSocketState & ChatSocketActions {

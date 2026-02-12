@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import api from '@/lib/api'
 import type { Session, Review, ReviewCreate } from '@/types'
+import { useAuthStore } from './authStore'
 
 interface SessionsState {
     sessions: Session[]

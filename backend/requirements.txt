@@ -21,3 +21,6 @@ redis==5.0.1
 
 # Static Files
 whitenoise==6.6.0
+
+# HTTP Client
+requests==2.31.0

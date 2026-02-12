@@ -37,10 +37,21 @@ export default function Whiteboard({ sessionId, isVisible, onSendData }: Whitebo
     // Handle incoming updates from peers
     useEffect(() => {
         const handleWhiteboardEvent = (event: CustomEvent) => {
-            if (!excalidrawAPI) return
+            console.log('DEBUG: Whiteboard Event Received', {
+                hasAPI: !!excalidrawAPI,
+                detail: event.detail
+            })
+
+            if (!excalidrawAPI) {
+                console.warn('DEBUG: Excalidraw API not ready, ignoring event')
+                return
+            }
             const { data } = event.detail
 
-            if (data.type === 'full_state' && data.source !== 'local') {
+            if (data.type === 'full_state') {
+                console.log('DEBUG: Processing full_state update')
+                // Backend already excludes the sender, so any message received is from a peer.
+                // We ignore the 'source' field because the peer sending it sets it to 'local'.
                 isImportingRef.current = true
                 excalidrawAPI.updateScene({
                     elements: data.elements,
@@ -54,6 +65,8 @@ export default function Whiteboard({ sessionId, isVisible, onSendData }: Whitebo
                 setTimeout(() => {
                     isImportingRef.current = false
                 }, 100)
+            } else {
+                console.log('DEBUG: Unknown whiteboard event type:', data.type)
             }
         }
 

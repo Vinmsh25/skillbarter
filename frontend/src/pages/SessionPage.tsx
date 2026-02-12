@@ -295,11 +295,15 @@ export default function SessionPage() {
                         />
                     </div>
 
-                    <div className={clsx('h-full w-full relative', activeMode !== 'video' && 'hidden')}>
-                        <VideoCall
-                            sessionId={sessionId}
-                            onSignal={sessionSocket.sendMessage}
-                        />
+                    <div className={clsx('h-full w-full relative bg-black', activeMode !== 'video' && 'hidden')}>
+                        {sessionSocket.session && (
+                            <VideoCall
+                                sessionId={sessionId}
+                                onSignal={sessionSocket.sendMessage}
+                                isConnected={sessionSocket.isConnected}
+                                isCaller={user?.id === sessionSocket.session?.user1}
+                            />
+                        )}
                     </div>
 
                     <div className={clsx('h-full w-full relative', activeMode !== 'code' && 'hidden')}>

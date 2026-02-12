@@ -29,31 +29,34 @@ class JWTAuthMiddleware(BaseMiddleware):
     """
     
     async def __call__(self, scope, receive, send):
-        print(f"DEBUG: JWTAuthMiddleware called for path: {scope.get('path')}")
-        # Get token from query string
-        query_string = scope.get('query_string', b'').decode()
-        token = None
-        
-        if query_string:
-            params = dict(param.split('=') for param in query_string.split('&') if '=' in param)
-            token = params.get('token')
-        
-        # If no token in query, check subprotocols
-        if not token:
-            subprotocols = scope.get('subprotocols', [])
-            for protocol in subprotocols:
-                if protocol.startswith('access_token_'):
-                    token = protocol.replace('access_token_', '')
-                    break
-        
-        # Authenticate user
-        if token:
-            print(f"DEBUG: JWTAuthMiddleware found token: {token[:10]}...")
-            user = await get_user_from_token(token)
-            print(f"DEBUG: JWTAuthMiddleware resolved user: {user} (ID: {user.id if hasattr(user, 'id') else 'None'})")
-            scope['user'] = user
-        else:
-            print("DEBUG: JWTAuthMiddleware - No token found")
+        try:
+            # Get token from query string
+            query_string = scope.get('query_string', b'').decode()
+            token = None
+            
+            if query_string:
+                from urllib.parse import parse_qs
+                params = parse_qs(query_string)
+                if 'token' in params:
+                    token = params['token'][0]
+            
+            # If no token in query, check subprotocols
+            if not token:
+                subprotocols = scope.get('subprotocols', [])
+                for protocol in subprotocols:
+                    if protocol.startswith('access_token_'):
+                        token = protocol.replace('access_token_', '')
+                        break
+            
+            # Authenticate user
+            if token:
+                user = await get_user_from_token(token)
+                scope['user'] = user
+            else:
+                scope['user'] = AnonymousUser()
+        except Exception as e:
+            # Fallback to anonymous user on any error to prevent crash
+            print(f"JWT Middleware Error: {e}")
             scope['user'] = AnonymousUser()
         
         return await super().__call__(scope, receive, send)

@@ -90,6 +90,9 @@ class BaseConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def get_user_data(self, user):
         """Get serializable user data."""
+        if not user or not user.is_authenticated:
+            return None
+            
         return {
             'id': user.id,
             'name': user.name,

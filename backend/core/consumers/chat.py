@@ -28,8 +28,11 @@ class ChatConsumer(BaseConsumer):
         return [self.chat_group]
     
     async def on_connected(self):
-        """Notify other participant that user joined chat."""
+        """Notify other participant that user joined chat and send history."""
         user_data = await self.get_user_data(self.user)
+        
+        # Send recent chat history to the user
+        await self.send_chat_history()
         
         await self.broadcast_to_group(
             self.chat_group,
@@ -37,8 +40,38 @@ class ChatConsumer(BaseConsumer):
             {'user': user_data}
         )
     
+    @database_sync_to_async
+    def get_chat_history(self):
+        """Fetch recent chat messages for this session."""
+        from ..models import ChatMessage
+        # Get LAST 50 messages (newest), then reverse to show in chronological order
+        messages = ChatMessage.objects.filter(session_id=self.session_id).order_by('-timestamp')[:50]
+        history = [
+            {
+                'sender': msg.sender.name,
+                'message': msg.message,
+                'timestamp': msg.timestamp.isoformat()
+            }
+            for msg in messages
+        ]
+        return history[::-1] # Reverse to chronological order
+
+    async def send_chat_history(self):
+        """Send chat history to the connected user."""
+        history = await self.get_chat_history()
+        for msg in history:
+            await self.send_json({
+                'type': 'chat_message',
+                'sender': msg['sender'],
+                'message': msg['message'],
+                'timestamp': msg['timestamp']
+            })
+
     async def on_disconnected(self):
         """Notify other participant that user left chat."""
+        if not hasattr(self, 'chat_group'):
+            return
+
         user_data = await self.get_user_data(self.user)
         
         await self.broadcast_to_group(
@@ -53,10 +86,12 @@ class ChatConsumer(BaseConsumer):
         message = data.get('message', '').strip()
         
         if not message:
-            # await self.send_error('Message content is required')
             return
         
         user_data = await self.get_user_data(self.user)
+        
+        # Save message to DB
+        await self.save_message(self.user, message)
         
         # Broadcast message to all participants
         await self.broadcast_to_group(
@@ -67,6 +102,16 @@ class ChatConsumer(BaseConsumer):
                 'message': message,
                 'timestamp': datetime.utcnow().isoformat()
             }
+        )
+
+    @database_sync_to_async
+    def save_message(self, user, message):
+        """Save chat message to database."""
+        from ..models import ChatMessage
+        ChatMessage.objects.create(
+            session_id=self.session_id,
+            sender=user,
+            message=message
         )
     
     async def handle_typing(self, data):
